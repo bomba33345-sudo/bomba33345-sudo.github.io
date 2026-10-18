@@ -1,0 +1,14 @@
+# Загруженные пользователями и сгенерированные демо-файлы
+uploads/audio/*
+uploads/covers/*
+uploads/avatars/*
+!uploads/audio/.gitkeep
+!uploads/covers/.gitkeep
+!uploads/avatars/.gitkeep
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

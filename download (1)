@@ -1,0 +1,29 @@
+# Защита папки uploads: запрещаем выполнение любых скриптов и листинг каталога.
+
+Options -Indexes -ExecCGI
+
+# Отключаем PHP-движок (mod_php)
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# Снимаем обработчики скриптов
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phps .phar .pl .py .cgi
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phps .phar
+
+# Полностью закрываем доступ к исполняемым расширениям
+<FilesMatch "\.(php|phtml|php[0-9]|phps|phar|pl|py|cgi|sh|asp|aspx|jsp|htaccess)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
